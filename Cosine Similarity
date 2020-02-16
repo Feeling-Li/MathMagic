@@ -1,0 +1,36 @@
+import time
+from sklearn.metrics.pairwise import cosine_similarity
+
+vecter_list = [[1,1,2,1,1,1,0,0,0], [1,1,1,0,1,1,1,1,1]]
+start = time.time()
+similarity = time.time() - start,cosine_similarity(vecter_list)[0][1]
+print(similarity)
+
+import numpy as np
+x = [1,1,2,1,1,1,0,0,0]
+y = [1,1,1,0,1,1,1,1,1]
+
+def cosine(vecter_x, vecter_y):
+    """
+        计算两个向量之间的余弦相似度
+        :param vector_x: 向量 x
+        :param vector_y: 向量 y
+        :return: cos_sim
+    """
+
+    vecter_x = np.mat(vecter_x) # 转换成矩阵
+    vecter_y = np.mat(vecter_y)
+
+    # 求向量内积后者点积 对应元素相乘 element-wise product or using np.multiply
+    # 向量需要转置成一行矩阵
+    # 如果是矩阵的话，就是乘积
+    Hadamard = float(vecter_x * vecter_y.T)
+    print(Hadamard)
+
+    # 求向量的平方和再开方，即求向量的范数，默认是二范数
+    norm = np.linalg.norm(vecter_x) * np.linalg.norm(vecter_y)
+    cos_sim = Hadamard / norm
+    return cos_sim
+
+start = time.time()
+print(time.time()-start,cosine(x,y))
